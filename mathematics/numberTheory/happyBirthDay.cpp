@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define Fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define int long long
+typedef vector<int>Vl;
+typedef pair<int,int>pii;
+typedef vector<pii>Vll;
+typedef vector<pair<int,pii> >Vlll;
+typedef priority_queue<int>PQL;
+typedef map<int,int>M;
+#define S second
+#define F first
+#define mp make_pair
+#define ms(x,y) memset(x,y,sizeof(x))
+#define pb push_back
+#define sl(n) cin>>n
+#define pl(n) cout<<n
+const int mod=1e9+7;
+const int sze=1e5+2;
+const int inf= (int)(1e19+10LL);
+int cnt[10];
+int dp[sze];
+Vl store;
+void fxn(int i,int num){
+	if(i>9){
+		
+		return;
+		
+	}
+	fxn(i+1,)
+	
+}
+void solve()
+{
+  for(int i=0;i<=9;i++)sl(cnt[i]);
+  fxn(0,0);
+		
+}
+ 
+signed main(){
+   int test=1;
+   sl(test);
+   while(test--){
+	  ms(dp,-1);
+      solve();
+ 
+   }
+  return 0;
+}
