@@ -23,7 +23,6 @@ typedef map<ll,ll>MP;
 #define rf(i,a,b) for(int i=(a);i>=b;i--)
 #define sl(n) scanf("%lld",&n)
 #define pl(n) printf("%lld",  n)
-#define vpshVar() int main()
 struct edge{
     ll a,b,cst;
 };
@@ -91,7 +90,7 @@ void solve(){
 
 
 }
-vpshVar(){
+signed main(){
     ll u,v,wt;
     sl(vert);
     sl(edg);
