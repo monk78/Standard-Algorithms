@@ -30,7 +30,6 @@ typedef map<ll,ll>MP;
 #define rf(i,a,b) for(int i=(a);i>=b;i--)
 #define sl(n) scanf("%lld",&n)
 #define pl(n) printf("%lld",n)
-#define vpshVar() int main()
 Vl graph[MAX];
 //bool visited[MAX];
 vector<bool>visited;
@@ -86,7 +85,7 @@ void dfsBridge(ll from,ll p=-1){
   }
 }
 
-vpshVar(){
+signed main(){
     artt=0,brdg=0,timer=0;
     ll N,M,x,y;
     sl(N);sl(M);
