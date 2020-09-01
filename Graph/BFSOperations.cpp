@@ -23,7 +23,6 @@ typedef map<ll,ll>MP;
 #define rf(i,a,b) for(int i=(a);i>=b;i--)
 #define sl(n) scanf("%lld",&n)
 #define pl(n) printf("%lld",n)
-#define vpshVar() int main()
 Vl graph[MAX];
 vector<bool>vis;
 ll P[MAX];
@@ -49,7 +48,7 @@ void BFS(ll src){
 
 }
 
-vpshVar(){
+signed main(){
     ll N,num,u,v,M;
     sl(N);sl(M);
 
