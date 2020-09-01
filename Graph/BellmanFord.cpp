@@ -17,8 +17,6 @@ typedef vector<ll>vl;
 #define sl(n) scanf("%lld",&n)
 #define pl(n) printf("%lld",n)
 
-/****_End_*************_of_************_H_eader_*******************/
-
 int main(){
     vector<ll>v[2000+10];
     ll dis[1010],m,n;
