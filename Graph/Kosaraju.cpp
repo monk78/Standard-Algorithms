@@ -1,77 +1,95 @@
-/**
-    @Author:Monk_78
-    @Topic:Kosaraju Algo_DDFS
-**/
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef vector<ll>Vl;
-typedef pair<ll,ll>PII;
-typedef vector<PII>Vll;
-typedef vector<pair<ll,pair<ll,ll> > >Vlll;
-typedef priority_queue<ll>PQL;
-typedef map<ll,ll>MP;
-#define S second;
-#define F first;
-#define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end));i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+ 
+#define Fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define int long long
+#define ld long double
+#define S second
+#define F first
 #define mp make_pair
 #define ms(x,y) memset(x,y,sizeof(x))
 #define pb push_back
-#define mod 1000000009
-#define MAX 100005
-#define f(i,a,b) for(int i=(a);i<(b);i++)
-#define rf(i,a,b) for(int i=(a);i>=b;i--)
-#define sl(n) scanf("%lld",&n)
-#define pl(n) printf("%lld ",n)
-#define vpshVar() int main()
-Vl graph[MAX];
-Vl graphT[MAX];
-bool visited[MAX];
-ll N,M;
-Vl tplgcl,comp;
-void printC(Vl comp){
-    for(auto it:comp)pl(it);
-    cout<<endl;
+#define sl(n) cin>>n
+#define pl(n) cout<<n
+#define sze(v) (int)(v.size())
+ 
+typedef vector<int>Vl;
+typedef pair<int,int>pii;
+typedef vector<pii>Vll;
+typedef vector<vector<int>>Vv;
+typedef vector<pair<int,pii> >Vlll;
+typedef priority_queue <int, vector<int>, greater<int>>PQL;
+typedef unordered_map<int,int>ump;
+ 
+const int mod=1e9+7;
+const int modx=998244353;
+const int Nx=1e5+2;
+const int inf= (int)(1e19+10LL);
+int n,m;
+vector<int>graph[Nx],graphR[Nx];
+Vl tpgcl;
+Vl comp;
+bool visited[Nx];
+void dfs1(int src){
+	visited[src]=true;
+	for(auto it:graph[src]){
+		if(visited[it]==true)continue;
+		dfs1(it);
+		
+	}
+	tpgcl.pb(src);
 }
-void dfs1(ll src){
-    visited[src]=true;
-    for(auto it:graph[src]){
-        if(!visited[it])dfs1(it);
-    }
-    tplgcl.pb(src);
-}
-void dfs2(ll src){
-    visited[src]=true;
-    comp.pb(src);
-    for(auto it:graphT[src]){
-        if(!visited[it])dfs2(it);
-    }
+void dfs2(int src){
+	visited[src]=true;
+	comp.pb(src);
+	for(auto it:graphR[src]){
+		if(visited[it]==true)continue;
+		dfs2(it);
+		
+	}
 }
 
-vpshVar(){
-    ll u,v;
-    sl(N);sl(M);
-    ms(visited,false);
-    tplgcl.clear();
-    for(ll i=0;i<M;i++){
-        sl(u);sl(v);
-        graph[u].pb(v);
-        graphT[v].pb(u);
-    }
-    for(ll i=1;i<=M;i++){
-        if(!visited[i])dfs1(i);
-    }
-    ms(visited,false);
-    //reverse(tplgcl.begin(),tplgcl.end());
-    for(ll i=0;i<N;i++){
-            ll it=tplgcl[N-i-1];
-        if(!visited[it]){
-            dfs2(it);
-            printC(comp);
-            comp.clear();
-        }
+void solve(){
+	sl(n);sl(m);
+	for(int i=0;i<m;i++){
+		int u,v;
+		sl(u);sl(v);
+		graph[u].pb(v);
+		graphR[v].pb(u);
+	}
+	dfs1(1);
+	reverse(tpgcl.begin(),tpgcl.end());
+	cout<<"top sorted:";
+	for(auto it:tpgcl)cout<<it<<" ";
+	cout<<endl;
+	ms(visited,false);
+	for(auto it:tpgcl){
+		if(visited[it])continue;
+		comp.clear();
+		dfs2(it);
+		for(auto it2:comp)cout<<it2<<" ";
+		cout<<endl;
+		
+	}
+	
+	
+}
 
 
-    }
-return 0;
+void init(){
+	for(int i=0;i<Nx;i++)graph[i].clear();
+	tpgcl.clear();
+	comp.clear();
+	ms(visited,false);
+}
+
+signed main(){
+   int test=1;
+   //sl(test);
+   while(test--){
+	   init();
+      solve();
+
+   }
+  return 0;
 }
