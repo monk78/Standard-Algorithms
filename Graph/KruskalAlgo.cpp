@@ -1,75 +1,132 @@
-/**
-    Author:Monk78
-    Time:2019-04-04-17.29.36
-**/
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-typedef vector<ll>vl;
-#define rep(i, begin, end) for (__typeof(end) i = (begin) - ((begin) > (end));i != (end) - ((begin) > (end)); i += 1 - 2 * ((begin) > (end)))
+ 
+#define Fast ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define int long long
+#define ld long double
+#define S second
+#define F first
 #define mp make_pair
 #define ms(x,y) memset(x,y,sizeof(x))
 #define pb push_back
-#define mod 1000000009
-#define f(i,a,b) for(int i=(a);i<(b);i++)
-#define rf(i,a,b) for(int i=(a);i>=b;i--)
-#define sl(n) scanf("%lld",&n)
-#define pl(n) printf("%lld",n)
-const int MAX=100000;
-int id[MAX],nodes,edges;
-pair<ll,pair<ll,ll> >p[MAX];
+#define sl(n) cin>>n
+#define pl(n) cout<<n
+#define sze(v) (int)(v.size())
+ 
+typedef vector<int>Vl;
+typedef pair<int,int>pii;
+typedef vector<pii>Vll;
+typedef vector<vector<int>>Vv;
+typedef vector<pair<int,pii> >Vlll;
+typedef priority_queue <int, vector<int>, greater<int>>PQL;
+typedef unordered_map<int,int>ump;
+ 
+const int mod=1e9+7;
+const int modx=998244353;
+const int Nx=1e5+2;
+const int inf= (int)(1e19+10LL);
 
-void intlz(){
-    for(ll i=0;i<MAX;i++){
-        id[i]=i;
-    }
+class Dsu{
+	public:
+	   int parent[Nx];
+	   int size[Nx];
+	   void init(){
+		     for(int i=1;i<Nx;i++){
+				 size[i]=1;
+				 parent[i]=i;
+			 }
+	   }
+	   int root(int a){
+		   if(parent[a]==a)return a;
+		   return root(parent[a]);
+		   
+	   }
+	   void unite(int a,int b){
+		   a=root(a);
+		   b=root(b);
+		   if(a==b)return;
+		   if(size[a]<size[b])swap(a,b);
+		   parent[b]=a;
+		   size[a]+=size[b];   
+	   }
+	   
+	   bool same(int a,int b)
+       {
+		   return root(a)==root(b);
+	   }
+	   
+}dsu;
+
+struct Edge{
+	int a,b,wt;
+	bool operator<(Edge const &other){
+		return wt<other.wt;
+	}
+};
+
+void solve(){
+ dsu.init();
+ vector<Edge>graph;
+ int n,m;
+ sl(n);sl(m);
+ for(int i=0;i<m;i++){
+	 Edge x,y;
+	 int a,b,c;
+	 sl(a);sl(b);sl(c);
+	 x.a=a;
+	 x.b=b;
+	 x.wt=c;
+	 y.a=b;
+	 y.b=a;
+	 y.wt=c;
+	 graph.pb(x);
+	 graph.pb(y);
+ }
+ sort(graph.begin(),graph.end());
+ int ans=0;
+ vector<Edge>result;
+ for(Edge e:graph){
+	 if(!dsu.same(e.a,e.b)){
+		 ans+=e.wt;
+		 result.pb(e);
+		 dsu.unite(e.a,e.b);
+	 }	 
+ }	
+ for(auto it:result)cout<<it.a<<" "<<it.b<<" \n";
+ cout<<endl;
+ cout<<ans<<endl;
+ 	
+	
 }
 
-int root(int x){
-  while(id[x]!=x){
-    id[x]=id[id[x]];
-    x=id[x];
-  }
-  return x;
+signed main(){
+	int test=1;
+	while(test--){
+	  solve();
+    }	
 }
+/*
+  input:
+6 9
+5 4 9
+5 1 4
+4 1 1
+4 3 5
+4 2 3
+1 2 2
+2 6 7
+2 3 3
+3 6 8
+output:
+4 1 
+1 2 
+2 3 
+5 1 
+2 6 
 
-void unionx(ll x,ll y){
-    ll p=root(x);
-    ll q=root(y);
-    id[p]=id[q];
-}
-
-ll kruskal(pair<ll,pair<ll,ll>>p[]){
-    ll x,y;
-    ll cost,mincost=0;
-    for(ll i=0;i<edges;++i){
-        x=p[i].second.first;
-        y=p[i].second.second;
-        cost=p[i].first;
-        if(root(x)!=root(y)){
-            mincost+=cost;
-            unionx(x,y);
-        }
-    }
-    return mincost;
-}
+17
 
 
-int main(){
-    ll x,y;
-    ll wt,cost,mincost;
-    intlz();
-    sl(nodes);
-    sl(edges);
-    for(ll i=0;i<edges;i++){
-        sl(x);
-        sl(y);
-        sl(wt);
-        p[i]=mp(wt,mp(x,y));
-    }
-    sort(p,p+edges);
-    mincost=kruskal(p);
-    cout<<mincost<<endl;
-return 0;
-}
 
+
+*/
