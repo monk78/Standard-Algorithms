@@ -55,7 +55,7 @@ void numberOFPath(){
  for(ll i=1;i<=vert;i++)pl(dp[i]);
 }
 
-vpshVar(){
+int main(){
     //graph.clear();
     ms(visited,false);
     sl(vert);
